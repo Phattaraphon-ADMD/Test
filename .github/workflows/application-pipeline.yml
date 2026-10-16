@@ -14,7 +14,7 @@ jobs:
   ci:
     uses: Phattaraphon-ADMD/org-platform-ci/.github/workflows/ci.yml@v1
     with:
-      language: java
+      language: node
       severity: HIGH,CRITICAL
       image_name: my-api
       build-args: |
