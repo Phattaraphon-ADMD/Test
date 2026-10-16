@@ -1,0 +1,34 @@
+name: Application Pipeline
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  # Central ci.yml runs language CI, Trivy, SonarQube, and (on push to main) image build/scan/push.
+  ci:
+    uses: Phattaraphon-ADMD/org-platform-ci/.github/workflows/ci.yml@v1
+    with:
+      language: java
+      severity: HIGH,CRITICAL
+      image_name: my-api
+      build-args: |
+        APP_ENV=production
+        APP_VERSION=1.0.0
+      enable_sonarqube: false
+      # sonarqube-args: |
+      #   -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+      #   -Dsonar.coverage.exclusions=tests/**,*.js,testing/**
+      #   -Dsonar.cpd.exclusions=tests/**,*.js,testing/**
+      #   -Dsonar.exclusions=Dockerfile
+    # secrets:
+    #   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    #   SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+    permissions:
+      contents: read
+      packages: write
