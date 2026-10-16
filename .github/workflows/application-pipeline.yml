@@ -19,7 +19,7 @@ jobs:
       image_name: my-api
       build-args: |
         APP_ENV=production
-        APP_VERSION=1.0.0
+        APP_VERSION=1.0.1
       enable_sonarqube: false
       # sonarqube-args: |
       #   -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
